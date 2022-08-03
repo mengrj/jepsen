@@ -13,8 +13,7 @@ if [ ! -f ~/.ssh/known_hosts ]; then
     sort -V /var/jepsen/shared/nodes > ~/nodes
     # Scan SSH keys
     while read node; do
-      ssh-keyscan -t rsa $node >> ~/.ssh/known_hosts
-      ssh-keyscan -t ed25519 $node >> ~/.ssh/known_hosts
+      ssh-keyscan -t rsa,ecdsa,ed25519 $node >> ~/.ssh/known_hosts
     done <~/nodes
 fi
 
