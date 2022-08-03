@@ -9,6 +9,8 @@ if [ ! -f ~/.ssh/known_hosts ]; then
     chmod 600 ~/.ssh/id_rsa
     echo $SSH_PUBLIC_KEY > ~/.ssh/id_rsa.pub
     echo > ~/.ssh/known_hosts
+    # wait a little bit for the last node to be up
+    sleep 5
     # Get nodes list
     sort -V /var/jepsen/shared/nodes > ~/nodes
     # Scan SSH keys
