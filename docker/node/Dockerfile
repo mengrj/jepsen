@@ -9,7 +9,7 @@ FROM jgoerzen/debian-base-standard:buster
 
 # Basic system stuff
 RUN apt-get update
-RUN apt-get install -y apt-transport-https
+RUN apt-get install -y apt-transport-https software-properties-common
 
 # Install packages
 RUN apt-get -qy update && \
@@ -30,7 +30,9 @@ RUN sed -i "s/#PermitRootLogin prohibit-password/PermitRootLogin yes/g" /etc/ssh
 ENV DEBBASE_SSH enabled
 
 # Install Jepsen deps
-RUN apt-get install -qy build-essential bzip2 curl dnsutils faketime iproute2 iptables iputils-ping libzip4 logrotate man man-db net-tools ntpdate psmisc python rsyslog sudo tar unzip vim wget ca-certificates
+RUN apt-get install -qy build-essential bzip2 curl dnsutils faketime iproute2 iptables iputils-ping libzip4 \ 
+    logrotate man man-db net-tools ntpdate psmisc python rsyslog sudo tar unzip vim wget ca-certificates \
+    git tcpdump cmake automake autoconf libtool
 
 EXPOSE 22
 CMD ["/usr/local/bin/boot-debian-base"]
